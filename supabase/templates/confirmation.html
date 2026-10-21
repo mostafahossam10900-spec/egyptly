@@ -1,0 +1,18 @@
+<div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; color: #1f2a44;">
+  <h2 style="font-family: Georgia, serif;">Egyptly</h2>
+  <p>Welcome to Egyptly! Please confirm that this email address belongs to you.</p>
+  <p>
+    <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email"
+       style="display:inline-block;padding:12px 24px;border-radius:999px;background:#d1ac5e;color:#1f2a44;text-decoration:none;font-weight:bold;">It’s me</a>
+  </p>
+  <p style="font-size: 13px; color: #5b6478;">This link expires. If you did not create an Egyptly account, you can ignore this email.</p>
+  <hr style="border:none;border-top:1px solid #e6dfcf;margin:24px 0;" />
+  <div dir="rtl" style="text-align: right;">
+    <p>مرحبًا بك في إيجيبتلي! من فضلك أكّد أن هذا البريد الإلكتروني يخصك.</p>
+    <p>
+      <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&lang=ar"
+         style="display:inline-block;padding:12px 24px;border-radius:999px;background:#d1ac5e;color:#1f2a44;text-decoration:none;font-weight:bold;">It’s me — هذا أنا</a>
+    </p>
+    <p style="font-size: 13px; color: #5b6478;">صلاحية الرابط محدودة. إذا لم تُنشئ حسابًا في إيجيبتلي فتجاهل هذه الرسالة.</p>
+  </div>
+</div>
