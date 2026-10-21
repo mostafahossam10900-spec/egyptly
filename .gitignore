@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+!.env.example
+coverage/
+playwright-report/
+test-results/
+supabase/.temp/
+supabase/.branches/
+*.log
+.DS_Store
+# Archive duplicate of the handoff folder
+Egyptly_Codex_Handoff.zip
