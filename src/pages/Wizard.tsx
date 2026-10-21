@@ -447,7 +447,7 @@ function StepLandmarks({ draft, refData, update }: { draft: TripDraft; refData: 
           <section key={dest} aria-labelledby={`lmh-${dest}`} className="flex flex-col gap-2">
             <h2 id={`lmh-${dest}`} className="text-2xl">
               {d ? pick(d) : dest}
-              {g && <span className="ms-2 text-base text-muted">{pick(g)}</span>}
+              {g && d && pick(g) !== pick(d) && <span className="ms-2 text-base text-muted">{pick(g)}</span>}
             </h2>
             {g && (g.note_ar || g.sources.length > 0) && (
               <details className="rounded-xl bg-sand-deep px-3 py-2 text-xs">

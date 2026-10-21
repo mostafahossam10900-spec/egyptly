@@ -15,6 +15,8 @@ interface AuthValue {
   ready: boolean
   session: Session | null
   profile: Profile | null
+  /** True after the user pressed "Log out" (so guards can say "logged out" rather than "log in required"). */
+  loggedOut: boolean
   refreshProfile: () => Promise<void>
   signOut: () => Promise<void>
 }
@@ -25,6 +27,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(!supabase)
   const [session, setSession] = useState<Session | null>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
+  const [loggedOut, setLoggedOut] = useState(false)
 
   const loadProfile = useCallback(async (userId: string | undefined) => {
     if (!supabase || !userId) {
@@ -50,6 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     })
     const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
       setSession(s)
+      if (s) setLoggedOut(false)
       // Defer DB calls out of the auth callback (recommended by supabase-js to avoid deadlocks).
       setTimeout(() => void loadProfile(s?.user.id), 0)
     })
@@ -64,14 +68,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       ready,
       session,
       profile,
+      loggedOut,
       refreshProfile: () => loadProfile(session?.user.id),
       signOut: async () => {
+        setLoggedOut(true)
         if (supabase) await supabase.auth.signOut()
         setSession(null)
         setProfile(null)
       },
     }),
-    [ready, session, profile, loadProfile],
+    [ready, session, profile, loggedOut, loadProfile],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

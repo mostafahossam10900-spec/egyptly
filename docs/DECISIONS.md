@@ -25,6 +25,15 @@
 | R-06 | Sub-sites (e.g. tombs inside Valley of the Kings) are selectable but displayed nested under their parent. | LMK says sub-sites are not independent visits automatically. |
 | R-07 | Images: honest illustrated/gradient placeholders with landmark name; no stock photos until rights are confirmed. | D-08. |
 | R-08 | English landmark names are implementer drafts flagged `name_en_reviewed = false`. | LMK: "English name after review". |
+| R-09 | Landmark selection (step 3) is optional; destinations, interests, dates, travellers, type, companions and budget are required to save a request. | A future guide can suggest landmarks; avoids blocking. |
+| R-10 | Consistency rules: Solo ⇒ 1 traveller, Couple ⇒ 2, Day trip ⇒ same arrival/departure date; max 120 nights, 1–100 travellers, budget ≤ 10,000,000 with ≤ 2 decimals. | Deterministic, testable checks. |
+| R-11 | Editing a saved (submitted) request returns it to draft until the tourist saves it again on the review step. | Prevents a half-edited request looking final. |
+| R-12 | Destinations = LMK area headings, except category headings inside one city (Cairo, Alexandria, Fayoum, Luxor East/West Bank, Siwa historic/natural), which become sections of a single city destination. Result: 27 destinations. Giza is split into "Pyramids, Saqqara & Dahshur" and "Bahariya Oasis"; Aswan into city, "Edfu & Kom Ombo", "Abu Simbel & Lake Nasser". | Category headings ("Museums") are not places. |
+| R-13 | Type classification adds `ancient_site` (Pharaonic) vs `historic_site` (Roman, Islamic, modern history) so "Ancient Egypt & archaeology" is not suggested for e.g. WWII cemeteries. | Better interest ordering; reversible. |
+| R-14 | Sources are stored per governorate (as in LMK) with `source_scope = 'governorate'`; per-landmark sources come with verification. | LMK sources cover groups, not items. |
+| R-15 | Interface uses Latin digits in Arabic (`ar-EG-u-nu-latn`) for dates and amounts. | Unambiguous for tourists; easy to switch. |
+| R-16 | Email links open `/auth/confirm`; nothing is verified until the user presses “It’s me” (token_hash + verifyOtp). | Matches IDEA §3 and avoids email scanners consuming links. |
+| R-17 | Backend = Supabase (PLAN proposal), run locally via the CLI until a hosted project is approved. | Single backend; no paid services. |
 
 ## Unresolved questions (do not decide silently)
 | # | Question | Blocks |

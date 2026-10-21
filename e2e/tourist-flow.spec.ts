@@ -71,7 +71,7 @@ test('tourist signs up, verifies email, completes, saves and edits a trip reques
   await page.getByTestId('basis-group').click()
   await page.getByTestId('cat-accommodation').click()
   await page.getByTestId('cat-entry_tickets').click()
-  await expect(page.getByText(/about \$1,000\.00 per person/)).toBeVisible()
+  await expect(page.getByText(/about US\$1,000\.00 per person, US\$5,000\.00 for the group/)).toBeVisible()
   await next(page)
 
   // Step 7 — review: request, not itinerary/booking

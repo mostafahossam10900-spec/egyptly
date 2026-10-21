@@ -4,6 +4,8 @@ import { defineConfig, devices } from '@playwright/test'
 // Uses the installed Microsoft Edge (channel msedge) so no browser download is needed on Windows ARM64.
 export default defineConfig({
   testDir: 'e2e',
+  // `CAPTURE=1 npx playwright test` runs only the screenshot helper instead of the test suite.
+  testMatch: process.env.CAPTURE ? '**/*.capture.ts' : '**/*.spec.ts',
   fullyParallel: false,
   workers: 1,
   timeout: 90_000,

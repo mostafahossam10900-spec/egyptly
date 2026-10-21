@@ -7,6 +7,9 @@ Start every session by reading, in order:
 4. `docs/DECISIONS.md` — confirmed decisions, reversible assumptions, open questions.
 5. `docs/INTEGRATIONS.md` — services and setup status.
 
+Run/test commands are in `README.md` (local Supabase via Docker: `npm run db:start`, `npm run env:local`, `npm run dev`; tests: `npm test`, `npm run test:integration`, `npm run test:e2e`).
+Reference data lives in `reference-data/landmarks.mjs`; regenerate the seed with `npm run seed:build`.
+
 Source documents: `الفكرة كاملة.md`, `Egyptly_Egypt_Landmarks_AR.md`, `Egyptly_Codex_Handoff/Egyptly_Codex_Handoff/START_HERE.md` and `docs/Egyptly_Action_Plan_AR.pdf` inside the handoff folder.
 
 Rules:

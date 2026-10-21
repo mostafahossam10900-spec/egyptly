@@ -246,9 +246,10 @@ export function LoginPage() {
       {!backendConfigured ? (
         <DemoAuthNotice />
       ) : (
-        <form noValidate onSubmit={submit} className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
           {error && <Alert tone="error">{t(error)}</Alert>}
           {error === 'auth.notConfirmed' && <ResendForm initialEmail={email} />}
+        <form noValidate onSubmit={submit} className="flex flex-col gap-4">
           <Field label={t('auth.email')}>
             {({ id, describedBy }) => (
               <Input id={id} type="email" dir="ltr" aria-describedby={describedBy} autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -274,6 +275,7 @@ export function LoginPage() {
             </p>
           </div>
         </form>
+        </div>
       )}
     </AuthShell>
   )
@@ -462,9 +464,10 @@ export function ResetPasswordPage() {
 }
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
-  const { ready, session } = useAuth()
+  const { ready, session, loggedOut } = useAuth()
   const location = useLocation()
   if (!ready) return <LoadingState />
+  if (!session && loggedOut) return <Navigate to="/login" replace state={{ flash: 'auth.loggedOut' }} />
   if (!session) {
     const next = encodeURIComponent(location.pathname + location.search)
     return <Navigate to={`/login?required=1&next=${next}`} replace />

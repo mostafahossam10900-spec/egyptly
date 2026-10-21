@@ -85,7 +85,8 @@ export function I18nProvider({ children, initial }: { children: ReactNode; initi
       t: (key, vars) => format(cat[key] ?? en[key], vars),
       pick: (r) => (locale === 'ar' ? r.name_ar : r.name_en),
       formatDate: (iso) => {
-        const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso)
+        // Plain calendar dates (yyyy-mm-dd) are shown as-is; timestamps in the viewer's local time zone.
+        const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso)
         const d = m ? new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])) : new Date(iso)
         return new Intl.DateTimeFormat(intlLocale, { dateStyle: 'medium', timeZone: m ? 'UTC' : undefined }).format(d)
       },

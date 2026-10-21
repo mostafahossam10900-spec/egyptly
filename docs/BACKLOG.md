@@ -3,7 +3,15 @@
 Order matters inside each phase. `→` = depends on.
 
 ## Phase 1 — Foundation, tourist accounts, saved trip requests
-**Blocked on U-01 (existing code?) and a local Node.js + Git toolchain.**
+**Status 2026-10-22: tasks 1.0–1.14 done and tested locally** (see CHECKPOINT.md). Remaining to go live: 1.15–1.17.
+
+| # | Task | Depends on |
+|---|---|---|
+| 1.15 | Create hosted Supabase project, push migrations + seed, configure Auth URLs/templates (needs approval + account) | — |
+| 1.16 | Production SMTP + verified sending domain; re-run E2E email tests against it | 1.15 |
+| 1.17 | Push repo to GitHub (team-owned) | repo URL |
+
+Original Phase 1 tasks (done):
 
 | # | Task | Depends on |
 |---|---|---|

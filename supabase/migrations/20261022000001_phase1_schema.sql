@@ -196,7 +196,8 @@ create table public.trip_interests (
 -- The composite foreign keys guarantee (in the database, not just the UI) that a selected landmark
 -- belongs to one of the trip's selected destinations; removing a destination removes its landmarks.
 create table public.trip_landmarks (
-  trip_id uuid not null,
+  -- Direct FK to trips as well, so the API can embed selections under a trip.
+  trip_id uuid not null references public.trips (id) on delete cascade,
   destination_slug text not null,
   landmark_slug text not null,
   primary key (trip_id, landmark_slug),

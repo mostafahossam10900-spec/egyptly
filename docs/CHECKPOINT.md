@@ -1,29 +1,51 @@
 # Egyptly — Checkpoint
 
-**Date:** 2026-10-22 · **Phase:** 1 (not started in code)
+**Date:** 2026-10-22 · **Phase:** 1 complete (local) · **Git:** see `git log` (local repository, no remote yet)
 
-## Inspection result
-- The working folder contains **documents only**: the two Markdown specs, the infographic PNG, and `Egyptly_Codex_Handoff` (START_HERE, MANIFEST, the action-plan PDF, and copies of both specs). The doc copies match their originals (SHA-256 verified).
-- No source code, package files, database config, migrations or credentials.
-- Existing Lovable demo (`pixel-perfect-canvas-6149.lovable.app`) is referenced but its code/backend are **unverified**.
-- Machine: Node.js, npm, Git and Supabase CLI **not installed**; Docker Desktop installed but not running.
+## What works (verified by automated tests against the local stack)
+| Area | Status | Evidence |
+|---|---|---|
+| App shell, Egyptly identity (from Lovable demo), responsive layout | Tested-working | E2E desktop 1366px + mobile 375px, no horizontal scroll |
+| Tourist / Tour Guide signup choice (guide = "Phase 2" notice, no account created) | Tested-working | E2E (Arabic) |
+| Tourist signup (first/last name, email, password), password policy | Tested-working | E2E |
+| Email verification with “It’s me” button, resend, expired/used link recovery | Tested-working **locally** (Mailpit) | E2E reads the real email from Mailpit |
+| Unconfirmed users cannot log in | Tested-working | E2E |
+| Login, logout, password reset by email | Tested-working **locally** | E2E |
+| Authorization separate from authentication (profiles.role, tourist-only trip creation, no self-promotion) | Tested-working | DB integration tests |
+| Trip ownership enforced by Postgres RLS (read/update/delete/insert/RPC) | Tested-working | DB integration tests + E2E (other user gets "not found") |
+| Reference data: 10 governorates, 27 destinations, 283 landmarks (= 283 bullets in source), parent sites, sources, unverified status, unknown operational fields | Tested-working | unit + DB tests |
+| 7-step wizard, 22 approved interests, interest-ordered landmarks with reasons, nested sub-sites | Tested-working | E2E |
+| Date/traveller/budget validation (client + DB constraints), duration explanation, arrival/departure availability | Tested-working | unit + DB + E2E |
+| Destination removal reconciles landmarks visibly (notice + Undo) and in the DB (composite FK cascade) | Tested-working | unit + DB + E2E |
+| Save progress, resume after re-login, edit submitted request (returns to draft until saved again) | Tested-working | E2E |
+| Dashboard: list, continue/edit, view summary, delete; loading/empty/error+retry states | Tested-working (delete: manual only) | E2E (list/empty), error state seen in a real failure |
+| English + Arabic (RTL), 6 more locales registered as "coming in Phase 4" | Tested-working | unit (key/placeholder parity) + E2E |
+| Demo mode (no backend configured) | Manually verified in browser | Banner shown, auth disabled |
+| Guides / AI pages | Placeholders only — clearly labelled "Soon / Phase 2–4" | — |
 
-## Feature status
-| Feature | Status |
-|---|---|
-| Everything in REQUIREMENTS.md | Missing (no code) |
-| Lovable demo screens | Unverified (public URL only, described as using fictional guide data) |
+## Not done / not claimed
+- **No hosted backend.** Everything runs on the local Supabase stack. Live email delivery to real inboxes is **not configured** (needs SMTP provider + domain) → see INTEGRATIONS.md.
+- No guide accounts, matching, AI plans, prices, payments or bookings exist.
+- English landmark names are drafts (`name_en_reviewed = false`); no landmark is verified for access/opening.
+- Images are illustrated placeholders (rights unknown).
+- Delete-trip has no automated test (window.confirm dialog); verified only by code review.
 
-## Completed
-- Read all supplied docs; created REQUIREMENTS, BACKLOG, DECISIONS, INTEGRATIONS, CHECKPOINT; added project CLAUDE.md.
+## Test results (last full run 2026-10-22)
+- `npm run build` (tsc + vite): pass (chunk-size warning only)
+- `npm test`: 23/23 pass
+- `npm run test:integration`: 15/15 pass
+- `npm run test:e2e`: 12/12 pass (6 flows × desktop + mobile, Microsoft Edge)
+- `npm run lint` (oxlint): 0 errors, style warnings only (setState-in-effect for loading resets, fast-refresh exports)
 
-## Tests
-- None yet (no code).
+## Environment notes
+- Installed this session: Node.js 24.20.0 LTS, Git 2.55 (winget, official packages).
+- Docker Desktop had crashed on start because of stale socket files; `%LOCALAPPDATA%\Docker\run` was renamed to `run.stale-20261022` (kept, not deleted) and Docker started normally.
+- The project lives in OneDrive; `node_modules` syncing can be slow. Consider excluding it or moving the repo outside OneDrive.
 
-## Blockers
-1. **U-01:** existing code (Lovable export / GitHub) or new implementation? — asked Mostafa.
-2. Node.js LTS + Git must be installed on this machine (needs approval to install via winget).
-3. Backend credentials (Supabase or existing) and email provider — Phase 1 can proceed in labelled demo mode without them.
+## Blockers for "live" (not for local Phase 1)
+1. Hosted Supabase project (free tier is enough to start) — needs Mostafa's account + approval.
+2. Email provider + verified sending domain for production verification/reset emails.
+3. Decision on hosting/domain (not deployed; requires explicit approval).
 
 ## Exact next task
-BACKLOG 1.0 / 1.1 once U-01 is answered.
+**Phase 2, task 2.1:** get the guide acceptance criteria and required documents from Mostafa (DECISIONS U-06). In parallel and unblocked: **2.4/2.5** — admin role + admin landmark management screen (add/review/update landmarks, set verification status and source per landmark), since the schema already supports it.

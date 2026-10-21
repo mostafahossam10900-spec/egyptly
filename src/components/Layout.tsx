@@ -118,7 +118,7 @@ export function Layout() {
           {t('demo.banner')}
         </div>
       )}
-      <header className="sticky top-0 z-20 border-b border-line/70 bg-sand/90 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-line/70 bg-sand">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <Wordmark />
           <nav aria-label={t('nav.mainLabel')} className="hidden items-center gap-1 lg:flex">
