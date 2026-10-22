@@ -1,6 +1,6 @@
 # Egyptly — Checkpoint
 
-**Date:** 2026-10-22 · **Phase:** 1 complete (local) · **Git:** public GitHub repo (code only)
+**Date:** 2026-10-22 · **Phase:** 1 complete (local) · **Git:** public GitHub repo (code only) — https://github.com/mostafahossam10900-spec/egyptly
 
 ## Repository
 - The public GitHub repo holds **code and docs only**. The source documents (`الفكرة كاملة.md`, `Egyptly_Egypt_Landmarks_AR.md`, the infographic PNG, `Egyptly_Codex_Handoff/` incl. the action-plan PDF) are git-ignored and stay local.
