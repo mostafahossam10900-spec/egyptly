@@ -1,6 +1,10 @@
 # Egyptly — Checkpoint
 
-**Date:** 2026-10-22 · **Phase:** 1 complete (local) · **Git:** see `git log` (local repository, no remote yet)
+**Date:** 2026-10-22 · **Phase:** 1 complete (local) · **Git:** public GitHub repo (code only)
+
+## Repository
+- The public GitHub repo holds **code and docs only**. The source documents (`الفكرة كاملة.md`, `Egyptly_Egypt_Landmarks_AR.md`, the infographic PNG, `Egyptly_Codex_Handoff/` incl. the action-plan PDF) are git-ignored and stay local.
+- They were removed from all of `main`'s history before the first push. The original history is kept in the local-only branch `backup/full-history-before-public` — never push it.
 
 ## What works (verified by automated tests against the local stack)
 | Area | Status | Evidence |

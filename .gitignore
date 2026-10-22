@@ -13,3 +13,8 @@ supabase/.branches/
 .DS_Store
 # Archive duplicate of the handoff folder
 Egyptly_Codex_Handoff.zip
+# Private source documents (idea, action plan, handoff) — kept locally, not in the public repo
+Egyptly_Codex_Handoff/
+Egyptly_Egypt_Landmarks_AR.md
+الفكرة كاملة.md
+Egyptly_*.png
